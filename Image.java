@@ -36,14 +36,14 @@ public class Image implements CustomTag {
 	private void resizeAction( Request request, imageUtil.Image img ) throws Exception {
 		String outputPath = getOutputPath(request);
 		String quality = request.getAttribute("quality", "80");
-		int width = request.getIntAttribute("x");
-		int height = request.getIntAttribute("y");
+		int width = request.getIntAttribute("x", 0);
+		int height = request.getIntAttribute("y", 0);
 		String thumbnail = request.getAttribute("thumbnail", "No").toUpperCase();
 		
 		// Couple more jpegresize translators.
-		if (width < 0 && height < 0) {
-			width = request.getIntAttribute("width");
-			height = request.getIntAttribute("height");
+		if (width <= 0 && height <= 0) {
+			width = request.getIntAttribute("width", 0);
+			height = request.getIntAttribute("height", 0);
 		}
 				
 		imageUtil.Image resized = null;
