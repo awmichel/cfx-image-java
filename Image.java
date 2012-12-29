@@ -102,10 +102,14 @@ public class Image implements CustomTag {
 		// JPEGResize uses a different argument name.
 		if (outputPath == null)
 			outputPath = request.getAttribute("filename");
-		
+
+		// Be compatible with cfimage.
 		if (outputPath == null)
-			throw new IllegalArgumentException("Required arugments 'output' or 'filename' not found.");
-		
+			outputPath = request.getAttribute("destination");
+
+		if (outputPath == null)
+			throw new IllegalArgumentException("Required arugments 'output', 'filename', or 'destination' not found.");
+
 		return outputPath;
 	}
 	
